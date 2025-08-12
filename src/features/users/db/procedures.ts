@@ -23,7 +23,7 @@ export const userRouter = createTRPCRouter({
       const users = await prisma.user.findMany({
         where: {
           NOT: {
-            role: "Admin",
+            role: "admin",
           },
         },
         select: {
