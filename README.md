@@ -4,7 +4,7 @@ LLM Course Platform is a web application for creating, managing, and selling dig
 
 ## 🌐 Live Preview
 
-🔗 https://your-demo-link.vercel.app
+🔗 https://kamar-kursus.vercel.app
 
 ---
 

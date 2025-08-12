@@ -46,7 +46,7 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-x-2 w-full mx-auto  justify-center">
             <Link href="/courses" className={buttonVariants()}>
-              Lihat Courses
+              Explore Courses
             </Link>
             <Link
               href="/login"
