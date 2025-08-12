@@ -56,7 +56,7 @@ please replace the email configuration in `.env` with your own Resend API key an
 
 ```bash
 # Clone the repo
-git clone https://github.com/peterVoid/kamar-kursus
+git clone https://github.com/peterVoid/kamar-kursus.git
 
 # Install dependencies
 npm install

@@ -2,7 +2,7 @@
 
 import { cn, generateCourseImageUrl } from "@/lib/utils";
 import { useCallback, useEffect, useState } from "react";
-import { ErrorCodeType, FileRejection, useDropzone } from "react-dropzone";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import { Card, CardContent } from "../ui/card";
@@ -146,8 +146,7 @@ export function MediaUploader({
   const onDrop = useCallback(
     (fileAccepted: File[], fileReject: FileRejection[]) => {
       if (!!fileReject.length) {
-        const errorCode: ErrorCodeType = fileReject[0].errors[0]
-          .code as ErrorCodeType;
+        const errorCode = fileReject[0].errors[0].code;
 
         if (errorCode === "file-invalid-type") {
           toast.error("Invalid file type");
