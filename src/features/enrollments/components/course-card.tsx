@@ -7,7 +7,7 @@ import { ButtonAlertDialog } from "@/features/user-dashboard/components/sidebar/
 import { EnrollmentGetManyCourse } from "../types";
 
 interface Props {
-  enrollment: EnrollmentGetManyCourse[0];
+  enrollment: EnrollmentGetManyCourse["items"][number];
   children: React.ReactNode;
   fromAdmin?: boolean;
   deleteFunc?: () => void;

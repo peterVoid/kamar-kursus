@@ -9,7 +9,7 @@ import {
 import { BookIcon, BrainIcon, ChartBarIncreasing } from "lucide-react";
 import Link from "next/link";
 
-export const FEATURES = [
+const FEATURES = [
   {
     icon: BookIcon,
     title: "Comprehensive & Diverse Courses",

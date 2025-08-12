@@ -17,11 +17,10 @@ export default async function Page({ searchParams }: Props) {
     <Card className="w-[400px]">
       <CardHeader className="text-center">
         <CardTitle className="font-bold text-xl">
-          Tolong cek dulu dong email nya
+          Please check your email first
         </CardTitle>
         <CardDescription className="text-muted-foreground text-sm">
-          Kita sudah mengirim kode verifikasi melalui email. Tolong periksa
-          email anda terlebih dahulu.
+          We have sent a verification code via email. Please check it.
         </CardDescription>
       </CardHeader>
       <VerifyEmailCardContent email={email} />

@@ -43,7 +43,7 @@ export const adminProcedure = baseProcedure.use(async ({ next }) => {
     headers: await headers(),
   });
 
-  if (!session || session.user.role !== "Admin") {
+  if (!session || session.user.role !== "admin") {
     throw new TRPCError({
       code: "NOT_FOUND",
       message: "User not found",

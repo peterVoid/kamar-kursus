@@ -27,12 +27,11 @@ export function VerifyEmailCardContent({ email }: Props) {
         email,
         otp: otpInput,
         fetchOptions: {
-          onSuccess: (data) => {
-            console.log(data);
-
-            // router.push("/");
+          onSuccess: () => {
+            router.push("/");
           },
-          onError: () => {
+          onError: (error) => {
+            console.log(`ERROR OTP:${error}`);
             toast.error("Something went wrong");
           },
         },
@@ -58,7 +57,7 @@ export function VerifyEmailCardContent({ email }: Props) {
           </InputOTP>
         </div>
         <span className="text-xs text-muted-foreground">
-          Masukan 6 digit code yang sudah dikirim melalui email
+          Input 6 digit code that has been sent to your email
         </span>
       </CardContent>
       <CardFooter>
@@ -67,7 +66,7 @@ export function VerifyEmailCardContent({ email }: Props) {
           disabled={otpInput.length !== 6 || isPending}
           onClick={onSubmit}
         >
-          Verifikasi Akun
+          Verify
         </Button>
       </CardFooter>
     </>

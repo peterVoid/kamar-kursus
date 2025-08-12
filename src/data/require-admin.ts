@@ -7,7 +7,7 @@ export async function requireAdmin() {
     headers: await headers(),
   });
 
-  if (!session?.user || session.user.role !== "Admin") {
+  if (!session?.user || session.user.role !== "admin") {
     return redirect("/");
   }
 

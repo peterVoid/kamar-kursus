@@ -6,7 +6,7 @@ export const adminRouter = createTRPCRouter({
     const totalSignup = await prisma.user.count({
       where: {
         NOT: {
-          role: "Admin",
+          role: "admin",
         },
       },
     });
@@ -14,7 +14,7 @@ export const adminRouter = createTRPCRouter({
     const totalCustomers = await prisma.user.findMany({
       where: {
         NOT: {
-          role: "Admin",
+          role: "admin",
         },
         enrollments: {
           some: {

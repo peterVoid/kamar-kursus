@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ButtonAlertDialog } from "@/features/user-dashboard/components/sidebar/button-alert-dialog";
 
 interface Props {
-  course: CourseGetManyOuput["items"][0];
+  course: CourseGetManyOuput["items"][number];
   children: React.ReactNode;
   fromAdmin?: boolean;
   deleteFunc?: () => void;
