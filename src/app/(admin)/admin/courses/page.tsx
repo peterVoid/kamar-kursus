@@ -1,5 +1,9 @@
 import { buttonVariants } from "@/components/ui/button";
-import { AdminCoursesContent } from "@/features/admin/components/admin-courses-content";
+import { DEFAULT_LIMIT } from "@/constans";
+import {
+  AdminCoursesContent,
+  AdminCoursesContentSkeleton,
+} from "@/features/admin/components/admin-courses-content";
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import Link from "next/link";
@@ -7,7 +11,16 @@ import { Suspense } from "react";
 
 export default function Page() {
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(trpc.courses.getManyAdmin.queryOptions());
+  void queryClient.prefetchInfiniteQuery(
+    trpc.courses.getMany.infiniteQueryOptions(
+      {
+        limit: DEFAULT_LIMIT,
+      },
+      {
+        getNextPageParam: (lastItem) => lastItem.nextCursor,
+      }
+    )
+  );
 
   return (
     <div>
@@ -18,7 +31,7 @@ export default function Page() {
         </Link>
       </div>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense>
+        <Suspense fallback={<AdminCoursesContentSkeleton />}>
           <AdminCoursesContent />
         </Suspense>
       </HydrationBoundary>

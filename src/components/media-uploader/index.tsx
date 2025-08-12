@@ -32,9 +32,15 @@ interface Props {
   value?: string;
   onChange: (value: string) => void;
   type?: "image" | "video";
+  disabled?: boolean;
 }
 
-export function MediaUploader({ onChange, value, type = "image" }: Props) {
+export function MediaUploader({
+  onChange,
+  value,
+  type = "image",
+  disabled = false,
+}: Props) {
   const [mediaState, setMediaState] = useState<MediaUploader>({
     id: null,
     file: null,
@@ -253,7 +259,7 @@ export function MediaUploader({ onChange, value, type = "image" }: Props) {
         <ExistMediaState
           url={mediaState.objectUrl}
           removeMedia={handleRemoveMedia}
-          isDeleting={mediaState.isDeleting}
+          isDeleting={mediaState.isDeleting || disabled}
           type={type}
         />
       );
@@ -273,7 +279,7 @@ export function MediaUploader({ onChange, value, type = "image" }: Props) {
       )}
     >
       <CardContent className="flex items-center justify-center size-full">
-        {!mediaState.file && <input {...getInputProps()} />}
+        {!mediaState.key && <input {...getInputProps()} />}
         {RenderContent()}
       </CardContent>
     </Card>

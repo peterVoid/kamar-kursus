@@ -15,3 +15,7 @@ export const CourseCategories = [
 export const CourseLevel = ["Beginner", "Intermediate", "Advance"];
 
 export const CourseStatus = ["Draft", "Publish", "Archive"];
+
+export const DEFAULT_LIMIT = 2;
+
+export const DEFAULT_PAGE_SIZE = 1;

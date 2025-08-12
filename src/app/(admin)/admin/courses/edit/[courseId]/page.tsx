@@ -1,3 +1,4 @@
+import { PageLoader } from "@/components/page-loader";
 import { EditCourseContent } from "@/features/courses/components/edit-course-content";
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -19,7 +20,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense>
+      <Suspense fallback={<PageLoader />}>
         <EditCourseContent id={courseId} />
       </Suspense>
     </HydrationBoundary>

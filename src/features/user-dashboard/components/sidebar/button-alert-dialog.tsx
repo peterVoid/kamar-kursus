@@ -8,8 +8,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./ui/alert-dialog";
-import { Button } from "./ui/button";
+} from "../../../../components/ui/alert-dialog";
+import { Button } from "../../../../components/ui/button";
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +17,7 @@ interface Props {
   description?: string;
   buttonText: string;
   func?: () => void;
+  isLoading?: boolean;
 }
 
 export function ButtonAlertDialog({
@@ -25,6 +26,7 @@ export function ButtonAlertDialog({
   description,
   buttonText,
   func,
+  isLoading,
 }: Props) {
   const [open, setOpen] = useState(false);
 
@@ -37,8 +39,8 @@ export function ButtonAlertDialog({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button type="button" onClick={func}>
+          <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
+          <Button type="button" onClick={func} disabled={isLoading}>
             {buttonText}
           </Button>
         </AlertDialogFooter>

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ButtonDialog } from "@/components/button-dialog";
+import { ButtonDialog } from "@/features/user-dashboard/components/sidebar/button-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -39,7 +39,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { CourseGetOneAdminOutput } from "../types";
 import { NewLessonForm } from "@/features/lessons/components/new-lesson-form";
-import { ButtonAlertDialog } from "@/components/button-alert-dialog";
+import { ButtonAlertDialog } from "@/features/user-dashboard/components/sidebar/button-alert-dialog";
 import Link from "next/link";
 
 interface Props {

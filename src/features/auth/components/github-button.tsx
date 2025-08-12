@@ -32,7 +32,7 @@ export function GithubButton() {
       ) : (
         <GithubIcon className="size-4" />
       )}
-      <p>Login dengan Github</p>
+      <p>Sign in with Github</p>
     </Button>
   );
 }

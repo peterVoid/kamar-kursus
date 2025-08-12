@@ -18,3 +18,10 @@ export const generateSlug = (value: string) => {
 export const generateCourseImageUrl = (key: string) => {
   return `https://${env.NEXT_PUBLIC_S3_BUCKET_NAME}.t3.storageapi.dev/${key}`;
 };
+
+export function formatAsDollar(value: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "usd",
+  }).format(value);
+}

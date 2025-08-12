@@ -1,10 +1,85 @@
 import prisma from "@/lib/prisma";
-import { adminProcedure, createTRPCRouter } from "@/trpc/init";
+import { adminProcedure, createTRPCRouter, userProcedure } from "@/trpc/init";
 import z from "zod";
 import { lessonDetailsSchema, newLessonSchema } from "../zod-schema";
 import { TRPCError } from "@trpc/server";
 
 export const lessonRouter = createTRPCRouter({
+  userMarkLesson: userProcedure
+    .input(
+      z.object({
+        id: z.string().min(1),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const { id } = input;
+      const { user } = ctx;
+
+      const userHasCompleted = await prisma.completedLesson.findUnique({
+        where: {
+          lessonId_userId: {
+            userId: user.id,
+            lessonId: id,
+          },
+        },
+      });
+
+      if (userHasCompleted) {
+        const deletedCompletedLesson = await prisma.completedLesson.delete({
+          where: {
+            id: userHasCompleted.id,
+          },
+        });
+
+        return deletedCompletedLesson;
+      }
+
+      const createdCompletedLesson = await prisma.completedLesson.create({
+        data: {
+          userId: user.id,
+          lessonId: id,
+        },
+      });
+
+      return createdCompletedLesson;
+    }),
+  getOneUserEnrolledCourse: userProcedure
+    .input(
+      z.object({
+        id: z.string().min(1),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      const { id } = input;
+      const { user } = ctx;
+
+      const lesson = await prisma.lesson.findFirst({
+        where: {
+          id,
+        },
+        select: {
+          id: true,
+          thumbnailKey: true,
+          videoKey: true,
+          title: true,
+          description: true,
+          completedLessons: {
+            where: {
+              userId: user.id,
+            },
+          },
+        },
+      });
+
+      if (!lesson) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Lesson not found",
+        });
+      }
+
+      return lesson;
+    }),
   getOne: adminProcedure
     .input(
       z.object({

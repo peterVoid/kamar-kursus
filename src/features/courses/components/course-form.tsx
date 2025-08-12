@@ -71,14 +71,14 @@ export function CourseForm({ data, id }: Props) {
     trpc.courses.create.mutationOptions({
       onSuccess: () => {
         toast.success("Successfully created course");
-        queryClient.invalidateQueries(trpc.courses.getManyAdmin.queryFilter());
+        queryClient.invalidateQueries(trpc.courses.getMany.queryFilter());
         queryClient.invalidateQueries(
           trpc.courses.getOneAdmin.queryFilter({ id })
         );
         router.push("/admin/courses");
       },
-      onError: () => {
-        toast.error("Failed to create course");
+      onError: (error) => {
+        toast.error(error.message ?? "Something went wrong");
       },
     })
   );
@@ -87,7 +87,7 @@ export function CourseForm({ data, id }: Props) {
     trpc.courses.update.mutationOptions({
       onSuccess: () => {
         toast.success("Successfully updated course");
-        queryClient.invalidateQueries(trpc.courses.getManyAdmin.queryFilter());
+        queryClient.invalidateQueries(trpc.courses.getMany.queryFilter());
         queryClient.invalidateQueries(
           trpc.courses.getOneAdmin.queryFilter({ id })
         );

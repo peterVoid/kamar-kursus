@@ -1,18 +1,12 @@
 "use client";
 
 import {
-  IconCamera,
-  IconChartBar,
   IconDashboard,
-  IconFileAi,
-  IconFileDescription,
-  IconFolder,
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
   IconSearch,
   IconSettings,
-  IconUsers,
 } from "@tabler/icons-react";
 import * as React from "react";
 
@@ -28,6 +22,7 @@ import {
 import { NavMain } from "@/features/admin/components/sidebar/nav-main";
 import { NavSecondary } from "@/features/admin/components/sidebar/nav-secondary";
 import { NavUser } from "@/features/admin/components/sidebar/nav-user";
+import { ShoppingBasket, UsersIcon } from "lucide-react";
 
 const data = {
   navMain: [
@@ -37,72 +32,19 @@ const data = {
       icon: IconDashboard,
     },
     {
+      title: "Users",
+      url: "/admin/users",
+      icon: UsersIcon,
+    },
+    {
       title: "Courses",
       url: "/admin/courses",
       icon: IconListDetails,
     },
     {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
+      title: "Purchasing Course",
+      url: "/admin/orders",
+      icon: ShoppingBasket,
     },
   ],
   navSecondary: [
@@ -144,7 +86,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavSecondary className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

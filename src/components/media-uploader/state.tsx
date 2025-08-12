@@ -46,6 +46,16 @@ export function ExistMediaState({
       ) : (
         <div className="relative w-full h-full flex items-center justify-center">
           <video src={url} controls className="size-full" />
+          <Button
+            type="button"
+            variant="destructive"
+            className="absolute right-2 top-2"
+            size="sm"
+            onClick={removeMedia}
+            disabled={isDeleting}
+          >
+            <XIcon className="size-4" />
+          </Button>
         </div>
       )}
     </>

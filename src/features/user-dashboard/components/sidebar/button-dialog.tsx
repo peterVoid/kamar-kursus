@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
+import { Button } from "../../../../components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../../../../components/ui/dialog";
 import { LucideIcon } from "lucide-react";
 
 interface Props {

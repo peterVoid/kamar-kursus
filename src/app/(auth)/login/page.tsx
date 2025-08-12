@@ -12,9 +12,9 @@ export default function Page() {
   return (
     <Card className="w-[400px] gap-2">
       <CardHeader>
-        <CardTitle className="font-bold text-2xl">Selamat datang!</CardTitle>
+        <CardTitle className="font-bold text-2xl">Welcome back!</CardTitle>
         <CardDescription className="text-muted-foreground text-sm">
-          Login dengan akun Github atau Email Account
+          Login with Github or Email Account
         </CardDescription>
         <div className="mt-3">
           <GithubButton />
@@ -23,9 +23,7 @@ export default function Page() {
       <CardContent>
         <div className="flex items-center gap-0.5 mb-3">
           <div className="flex-1 h-[1px] bg-muted-foreground" />
-          <div className="text-muted-foreground text-sm">
-            atau lanjutkan dengan
-          </div>
+          <div className="text-muted-foreground text-sm">or continue with</div>
           <div className="flex-1 h-[1px] bg-muted-foreground" />
         </div>
         <LoginForm />

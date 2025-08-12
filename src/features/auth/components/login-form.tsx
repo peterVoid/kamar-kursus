@@ -41,7 +41,7 @@ export function LoginForm() {
           },
           onError: (error) => {
             console.error(error);
-            toast.error("Gagal untuk verifikasi akun. Coba lagi beberapa saat");
+            toast.error("Failed to verify account. Please try again.");
           },
         },
       });
@@ -75,7 +75,7 @@ export function LoginForm() {
             ) : (
               <SendIcon className="size-4" />
             )}
-            Lanjutkan dengan Email
+            Continue with Email
           </Button>
         </form>
       </Form>

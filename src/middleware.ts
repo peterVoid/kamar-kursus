@@ -8,7 +8,12 @@ const aj = arcjet({
   rules: [
     detectBot({
       mode: "LIVE",
-      allow: ["CATEGORY:SEARCH_ENGINE", "CATEGORY:MONITOR", "CATEGORY:PREVIEW"],
+      allow: [
+        "CATEGORY:SEARCH_ENGINE",
+        "CATEGORY:MONITOR",
+        "CATEGORY:PREVIEW",
+        "STRIPE_WEBHOOK",
+      ],
     }),
   ],
 });
@@ -26,7 +31,10 @@ export const authMiddleware = (request: NextRequest) => {
 };
 
 export default createMiddleware(aj, async (request: NextRequest) => {
-  if (request.nextUrl.pathname.startsWith("/admin")) {
+  if (
+    request.nextUrl.pathname.startsWith("/admin") ||
+    request.nextUrl.pathname.startsWith("/dashboard")
+  ) {
     return authMiddleware(request);
   }
 

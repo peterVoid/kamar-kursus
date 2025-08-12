@@ -24,6 +24,20 @@ const t = initTRPC.create({
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
+export const userProcedure = baseProcedure.use(async ({ next }) => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "User not found",
+    });
+  }
+
+  return next({ ctx: { user: session.user } });
+});
 export const adminProcedure = baseProcedure.use(async ({ next }) => {
   const session = await auth.api.getSession({
     headers: await headers(),

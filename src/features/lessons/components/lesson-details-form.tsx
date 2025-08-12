@@ -110,6 +110,7 @@ export function LessonDetailsForm({ id }: Props) {
                   value={field.value}
                   onChange={field.onChange}
                   type="image"
+                  disabled={isPending}
                 />
               </FormControl>
               <FormMessage />

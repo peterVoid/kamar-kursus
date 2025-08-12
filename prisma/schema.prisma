@@ -9,16 +9,19 @@ datasource db {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  role          UserRole  @default(User)
-  sessions      Session[]
-  accounts      Account[]
+  id               String            @id
+  name             String
+  email            String
+  emailVerified    Boolean
+  image            String?
+  createdAt        DateTime
+  updatedAt        DateTime
+  role             UserRole          @default(User)
+  sessions         Session[]
+  accounts         Account[]
+  stripeCustomerId String?           @unique
+  enrollments      Enrollment[]
+  completedLessons CompletedLesson[]
 
   banned     Boolean?
   banReason  String?
@@ -90,11 +93,12 @@ model Course {
   level            CourseLevel  @default(Beginner)
   category         String
   shortDescription String
-  stripePriceId    String
+  stripePriceId    String       @unique
   slug             String       @unique
   status           CourseStatus @default(Draft)
 
-  chapters Chapter[]
+  chapters    Chapter[]
+  enrollments Enrollment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -136,6 +140,42 @@ model Lesson {
   chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   chapterId String
 
+  completedLessons CompletedLesson[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Enrollment {
+  id        String           @id @default(uuid())
+  amount    Int
+  status    EnrollmentStatus @default(Pending)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  User     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+  Course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId String
+
+  @@unique([userId, courseId])
+}
+
+enum EnrollmentStatus {
+  Pending
+  Active
+  Cancel
+}
+
+model CompletedLesson {
+  id       String @id @default(uuid())
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([lessonId, userId])
 }
