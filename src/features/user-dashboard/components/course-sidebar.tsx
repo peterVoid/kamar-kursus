@@ -38,6 +38,10 @@ export function CourseSidebar({ slug }: Props) {
     0
   );
 
+  const progressLessonPercentage = Math.round(
+    (lessonCompletedCount / totalLessonCount) * 100
+  );
+
   return (
     <div>
       <div className="border-b border-border p-2">
@@ -60,10 +64,9 @@ export function CourseSidebar({ slug }: Props) {
               {lessonCompletedCount} / {totalLessonCount} lessons
             </span>
           </div>
-          <Progress value={20} />
+          <Progress value={progressLessonPercentage} />
           <div className="text-sm text-muted-foreground font-medium">
-            {Math.round((lessonCompletedCount / totalLessonCount) * 100)}%
-            completed
+            {progressLessonPercentage}% completed
           </div>
         </div>
       </div>

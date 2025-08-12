@@ -40,7 +40,9 @@ export function AdminCoursesContent() {
   const { mutate: deleteCourse, isPending: deleteCoursePending } = useMutation(
     trpc.courses.delete.mutationOptions({
       onSuccess: () => {
-        queryClient.invalidateQueries(trpc.courses.getMany.queryFilter());
+        queryClient.invalidateQueries(
+          trpc.courses.getMany.infiniteQueryFilter()
+        );
         toast.success("Successfully deleted course");
       },
       onError: () => {
